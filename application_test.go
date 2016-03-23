@@ -1,4 +1,4 @@
-package main
+package gomodo
 
 import (
 	"github.com/stretchr/testify/assert"

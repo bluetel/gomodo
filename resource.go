@@ -1,4 +1,4 @@
-package main
+package gomodo
 
 // A Resource controls Actions that can be performed
 // These are command controllers that contain
