@@ -15,3 +15,9 @@ func NewRouter() *Router {
 func (r *Router) Add(action string, obj string) {
 	r.Routes[action] = obj
 }
+
+// Returns the found name and boolean flag as to whether it was successful
+func (r *Router) Find(action string) (string, bool) {
+	obj, exists := r.Routes[action]
+	return obj, exists
+}
