@@ -2,19 +2,16 @@ package gomodo
 
 import (
 	"os"
+	"reflect"
 )
 
 // Application Object to create
 // base CLI layer
 type Application struct {
-	// The Application Name
-	Name string
-	// The Application Version
-	Version string
-	// A list of Command Routes
-	CommandRoutes []string
-	// List of arguments
+	Name      string
+	Version   string
 	Arguments []string
+	Router    *Router
 }
 
 // Creates A new Application Struct and returns a pointer to this.
@@ -22,21 +19,23 @@ func NewApplication(name string, version string) *Application {
 	return &Application{
 		Name:    name,
 		Version: version,
+		Router:  NewRouter(),
 	}
 }
 
 // Runs the Application
-func (app *Application) run() {
-	// Get the arguments
+func (app *Application) Run() {
 	app.Arguments = os.Args
-	// Pass to the validator
-	// Find Command
-	// Run Command
 }
 
 // Adds a resource to the Application
 // This is how you get a command into the App
 func (app *Application) AddResource(r Resource) {
-	// Needs to read the results of a reflection
-	// On the given resource class
+	// Get the Name of the Struct from reflect
+	obj := reflect.TypeOf(r).Name()
+	// Get the Command name from struct method
+	action := r.GetName()
+
+	// Add to router
+	app.Router.Add(action, obj)
 }
