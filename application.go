@@ -28,7 +28,6 @@ func (app *Application) Run() {
 }
 
 // Adds a resource to the Application
-// This is how you get a command into the App
 func (app *Application) AddResource(r Resource) {
 	app.Router.AddResource(r)
 }

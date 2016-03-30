@@ -31,7 +31,7 @@ func TestCanFindAddedRoute(t *testing.T) {
 	router.AddResource(&TestResource{})
 
 	obj, exists := router.Find("Test")
-	assert.Equal(t, "TestResource", obj)
+	assert.Equal(t, "TestResource", obj.Name())
 	assert.Equal(t, true, exists)
 }
 
