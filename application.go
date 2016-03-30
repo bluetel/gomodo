@@ -2,7 +2,6 @@ package gomodo
 
 import (
 	"os"
-	"reflect"
 )
 
 // Application Object to create
@@ -11,7 +10,7 @@ type Application struct {
 	Name      string
 	Version   string
 	Arguments []string
-	Router    *Router
+	Router    Router
 }
 
 // Creates A new Application Struct and returns a pointer to this.
@@ -31,11 +30,5 @@ func (app *Application) Run() {
 // Adds a resource to the Application
 // This is how you get a command into the App
 func (app *Application) AddResource(r Resource) {
-	// Get the Name of the Struct from reflect
-	obj := reflect.TypeOf(r).Name()
-	// Get the Command name from struct method
-	action := r.GetName()
-
-	// Add to router
-	app.Router.Add(action, obj)
+	app.Router.AddResource(r)
 }

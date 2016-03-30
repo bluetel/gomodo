@@ -15,9 +15,3 @@ type HelpTask struct {
 func (t *HelpTask) GetName() string {
 	return "help"
 }
-
-// @Command list
-// @Description Lists available commands
-func (t *HelpTask) ListCommand(app *Application) {
-	// Lists commands
-}

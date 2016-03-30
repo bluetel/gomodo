@@ -5,6 +5,8 @@ import (
 	"testing"
 )
 
+// I Should be Able to Create a new Application
+// And get the Name and Version
 func TestApplicationCreation(t *testing.T) {
 	app := NewApplication("Test", "v1.0.0")
 

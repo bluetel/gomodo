@@ -5,12 +5,21 @@ import (
 	"testing"
 )
 
+// A Test Resource
+type TestResource struct {
+}
+
+// Get Name Method
+func (t *TestResource) GetName() string {
+	return "Test"
+}
+
 // I should be able to create a new Router
 // And add a route to it
 // This should then be added to the Route Map
 func TestCanAddRoutes(t *testing.T) {
 	router := NewRouter()
-	router.Add("test", "test")
+	router.AddResource(&TestResource{})
 	assert.Equal(t, 1, len(router.Routes))
 }
 
@@ -19,10 +28,10 @@ func TestCanAddRoutes(t *testing.T) {
 // Using the Find method
 func TestCanFindAddedRoute(t *testing.T) {
 	router := NewRouter()
-	router.Add("action", "structName")
+	router.AddResource(&TestResource{})
 
-	obj, exists := router.Find("action")
-	assert.Equal(t, "structName", obj)
+	obj, exists := router.Find("Test")
+	assert.Equal(t, "TestResource", obj)
 	assert.Equal(t, true, exists)
 }
 
