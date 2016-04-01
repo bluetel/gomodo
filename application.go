@@ -1,6 +1,7 @@
 package gomodo
 
 import (
+	"flag"
 	"os"
 )
 
@@ -10,6 +11,7 @@ type Application struct {
 	Name      string
 	Version   string
 	Arguments []string
+	Options   []string
 	Router    Router
 }
 
@@ -24,7 +26,27 @@ func NewApplication(name string, version string) *Application {
 
 // Runs the Application
 func (app *Application) Run() {
-	app.Arguments = os.Args
+	// Get the command name from os
+	action := os.Args[1]
+	// Does action exist
+	_, success := app.Router.Find(action)
+
+	if success {
+		// Parse arguments
+		app.sortParameters()
+		// Fire the command action
+	}
+
+	// List commands as the specified was not found
+
+}
+
+// Sorts Arguments and Options
+func (app *Application) sortParameters() {
+	// Parse Flags
+	flag.Parse()
+	// Extract Arguments
+	app.Arguments = flag.Args()
 }
 
 // Adds a resource to the Application
