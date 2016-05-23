@@ -38,7 +38,8 @@ func (app *Application) Run() {
 	}
 
 	// List commands as the specified was not found
-
+	cmd := &ListTask{}
+	cmd.PerformAction(app)
 }
 
 // Sorts Arguments and Options
