@@ -21,8 +21,7 @@ func TestCanFindAddedRoute(t *testing.T) {
 	router := NewRouter()
 	router.AddResource(&HelpTask{})
 
-	obj, exists := router.Find("help")
-	assert.Equal(t, "HelpTask", obj.Name())
+	_, exists := router.Find("help")
 	assert.Equal(t, true, exists)
 }
 
