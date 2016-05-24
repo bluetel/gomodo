@@ -1,7 +1,6 @@
 package gomodo
 
 import (
-	"flag"
 	"os"
 )
 
@@ -32,9 +31,8 @@ func (app *Application) Run() {
 	_, success := app.Router.Find(action)
 
 	if success {
-		// Parse arguments
-		app.sortParameters()
-		// Fire the command action
+		// Parse params
+		// Run command
 	}
 
 	// List commands as the specified was not found
@@ -44,10 +42,6 @@ func (app *Application) Run() {
 
 // Sorts Arguments and Options
 func (app *Application) sortParameters() {
-	// Parse Flags
-	flag.Parse()
-	// Extract Arguments
-	app.Arguments = flag.Args()
 }
 
 // Adds a resource to the Application
