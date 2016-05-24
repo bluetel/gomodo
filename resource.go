@@ -9,22 +9,6 @@ type Resource interface {
 	PerformAction(app *Application)
 }
 
-// Default Help Task
-type HelpTask struct {
-}
-
-func (t *HelpTask) GetName() string {
-	return "help"
-}
-
-func (t *HelpTask) GetDescription() string {
-	return "Provides help for a specific command, or all commands"
-}
-
-func (t *HelpTask) PerformAction(app *Application) {
-	// Nothing to do here *yet*
-}
-
 // List task
 type ListTask struct {
 }

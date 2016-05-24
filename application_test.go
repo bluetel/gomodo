@@ -25,3 +25,10 @@ func TestAddCommandToRouter(t *testing.T) {
 	_, success := app.Router.Find("list")
 	assert.Equal(t, true, success, "The command should be found by the Router")
 }
+
+// I Should be able to run the application
+// With no commands
+func TestRunApplication(t *testing.T) {
+	app := NewApplication("Test", "v1.0.0")
+	app.Run()
+}

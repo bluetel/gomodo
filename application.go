@@ -1,6 +1,7 @@
 package gomodo
 
 import (
+	"github.com/jessevdk/go-flags"
 	"os"
 )
 
@@ -25,23 +26,25 @@ func NewApplication(name string, version string) *Application {
 
 // Runs the Application
 func (app *Application) Run() {
-	// Get the command name from os
-	action := os.Args[1]
-	// Does action exist
-	_, success := app.Router.Find(action)
+	if len(os.Args) > 1 {
+		// Get the command name from os
+		action := os.Args[1]
+		// Does action exist
+		command, success := app.Router.Find(action)
 
-	if success {
-		// Parse params
-		// Run command
+		if success {
+			// Parse params
+			flags.Parse(command)
+			// Run command
+			command.PerformAction(app)
+			// Stop further execution
+			return
+		}
 	}
 
 	// List commands as the specified was not found
 	cmd := &ListTask{}
 	cmd.PerformAction(app)
-}
-
-// Sorts Arguments and Options
-func (app *Application) sortParameters() {
 }
 
 // Adds a resource to the Application

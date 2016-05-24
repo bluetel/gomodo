@@ -10,7 +10,7 @@ import (
 // This should then be added to the Route Map
 func TestCanAddRoutes(t *testing.T) {
 	router := NewRouter()
-	router.AddResource(&HelpTask{})
+	router.AddResource(&ListTask{})
 	assert.Equal(t, 1, len(router.Routes))
 }
 
@@ -19,9 +19,9 @@ func TestCanAddRoutes(t *testing.T) {
 // Using the Find method
 func TestCanFindAddedRoute(t *testing.T) {
 	router := NewRouter()
-	router.AddResource(&HelpTask{})
+	router.AddResource(&ListTask{})
 
-	_, exists := router.Find("help")
+	_, exists := router.Find("list")
 	assert.Equal(t, true, exists)
 }
 
