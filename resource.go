@@ -1,5 +1,9 @@
 package gomodo
 
+import (
+	"fmt"
+)
+
 // A Resource controls Actions that can be performed
 // These are command controllers that contain
 // Further actions or a main action.
@@ -22,6 +26,25 @@ func (t *ListTask) GetDescription() string {
 }
 
 func (t *ListTask) PerformAction(app *Application) {
+	// Print application details
+	fmt.Println("NAME:")
+	fmt.Println(fmt.Sprintf("%4s %s - %s", "", app.Name, app.Description))
+
+	fmt.Println("VERSION:")
+	fmt.Println(fmt.Sprintf("%4s %s", "", app.Version))
+
+	// Usage
+	fmt.Println("USAGE:")
+	fmt.Println(fmt.Sprintf("%4s %s [commmand] [options] [arguments]", "", app.Base))
+
 	// Get All Commands
+	routes := app.Router.GetRouteMap()
+
 	// List them out
+	fmt.Println("COMMANDS:")
+
+	for key, route := range routes {
+		usage := fmt.Sprintf("%s %s [options] [arguments]", app.Base, key)
+		fmt.Println(fmt.Sprintf("%s %10s %32s - %s", key, "", usage, route.GetDescription()))
+	}
 }

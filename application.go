@@ -8,24 +8,30 @@ import (
 // Application Object to create
 // base CLI layer
 type Application struct {
-	Name      string
-	Version   string
-	Arguments []string
-	Options   []string
-	Router    Router
+	Name        string
+	Description string
+	Version     string
+	Base        string
+	Arguments   []string
+	Options     []string
+	Router      Router
 }
 
 // Creates A new Application Struct and returns a pointer to this.
-func NewApplication(name string, version string) *Application {
+func NewApplication(name string, description string, version string) *Application {
 	return &Application{
-		Name:    name,
-		Version: version,
-		Router:  NewRouter(),
+		Name:        name,
+		Description: description,
+		Version:     version,
+		Router:      NewRouter(),
 	}
 }
 
 // Runs the Application
 func (app *Application) Run() {
+	// Set Base for file name
+	app.Base = os.Args[0]
+
 	if len(os.Args) > 1 {
 		// Get the command name from os
 		action := os.Args[1]

@@ -6,6 +6,8 @@ type Router interface {
 	AddResource(r Resource)
 	// Method to find a resource
 	Find(action string) (Resource, bool)
+	// Returns a map of routes
+	GetRouteMap() map[string]Resource
 }
 
 type MapRouter struct {
@@ -28,4 +30,9 @@ func (m *MapRouter) AddResource(r Resource) {
 func (m *MapRouter) Find(action string) (Resource, bool) {
 	obj, exists := m.Routes[action]
 	return obj, exists
+}
+
+// Simply returns the Routes property, since its already a map
+func (m *MapRouter) GetRouteMap() map[string]Resource {
+	return m.Routes
 }
