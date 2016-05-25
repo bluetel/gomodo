@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/Bluetel-Solutions/gomodo.svg?branch=master)](https://travis-ci.org/Bluetel-Solutions/gomodo)
 
 # Gomodo
-The aim of gomodo is to make CLI projects a little easier.
+Gomodo is a GO Lang CLI framework that allows you to express Actions as structs. The purpose of this is to provide you with a basic framework that provides all the bootstrap you need to create large scale command line applications.
 
 # Basic Usage
 
@@ -19,7 +19,7 @@ type Task struct {
 
 // The Name of the task
 func (t *Task) GetName() string {
-	return "test-task"
+	return "test"
 }
 
 // The task Description
@@ -33,7 +33,7 @@ func (t *Task) PerformAction(app *gomodo.Application) {
 }
 
 func main() {
-	app := gomodo.NewApplication("My CLI Name", "v0.1.0")
+	app := gomodo.NewApplication("My CLI Name", "My CLI Description", "v0.1.0")
 	app.AddResource(&Task{})
 
 	app.Run()
