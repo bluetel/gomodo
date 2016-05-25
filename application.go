@@ -10,6 +10,7 @@ import (
 type Application struct {
 	Name        string
 	Description string
+	Tag         string
 	Version     string
 	Base        string
 	Arguments   []string

@@ -26,6 +26,8 @@ func (t *ListTask) GetDescription() string {
 }
 
 func (t *ListTask) PerformAction(app *Application) {
+	// If Tag is set print tag
+	fmt.Print(app.Tag)
 	// Print application details
 	fmt.Println("NAME:")
 	fmt.Println(fmt.Sprintf("%4s %s - %s", "", app.Name, app.Description))
