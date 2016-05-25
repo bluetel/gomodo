@@ -41,21 +41,30 @@ func (app *Application) Run() {
 	if len(os.Args) > 1 {
 		// Get the command name from os
 		action := os.Args[1]
-		// Does action exist
-		command, success := app.Router.Find(action)
 
-		if success {
-			// Parse params
-			flags.Parse(command)
-			// Run command
-			command.PerformAction(app)
-			// Stop further execution
+		if app.Forward(action) {
+			// Prevent further execution
 			return
 		}
 	}
 
 	// List commands as the specified was not found
 	list.PerformAction(app)
+}
+
+// Used to execute a command, Inside another command
+// it can be used to forward the action
+func (app *Application) Forward(action string) bool {
+	cmd, success := app.Router.Find(action)
+
+	if success {
+		// Parse params
+		flags.Parse(cmd)
+		// Run command
+		cmd.PerformAction(app)
+	}
+
+	return success
 }
 
 // Adds a resource to the Application
