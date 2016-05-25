@@ -32,6 +32,11 @@ func (app *Application) Run() {
 	// Set Base for file name
 	app.Base = os.Args[0]
 
+	list := &ListTask{}
+
+	// Add the standard tasks
+	app.AddResource(list)
+
 	if len(os.Args) > 1 {
 		// Get the command name from os
 		action := os.Args[1]
@@ -49,8 +54,7 @@ func (app *Application) Run() {
 	}
 
 	// List commands as the specified was not found
-	cmd := &ListTask{}
-	cmd.PerformAction(app)
+	list.PerformAction(app)
 }
 
 // Adds a resource to the Application
