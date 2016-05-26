@@ -27,26 +27,26 @@ func (t *ListTask) GetDescription() string {
 
 func (t *ListTask) PerformAction(app *Application) {
 	// If Tag is set print tag
-	fmt.Print(app.Tag)
+	app.Output.Write(app.Tag)
 	// Print application details
-	fmt.Println("NAME:")
-	fmt.Println(fmt.Sprintf("%4s %s - %s", "", app.Name, app.Description))
+	app.Output.WriteLn("NAME:")
+	app.Output.WriteLn(fmt.Sprintf("%4s %s - %s", "", app.Name, app.Description))
 
-	fmt.Println("VERSION:")
-	fmt.Println(fmt.Sprintf("%4s %s", "", app.Version))
+	app.Output.WriteLn("VERSION:")
+	app.Output.WriteLn(fmt.Sprintf("%4s %s", "", app.Version))
 
 	// Usage
-	fmt.Println("USAGE:")
-	fmt.Println(fmt.Sprintf("%4s %s [commmand] [options] [arguments]", "", app.Base))
+	app.Output.WriteLn("USAGE:")
+	app.Output.WriteLn(fmt.Sprintf("%4s %s [commmand] [options] [arguments]", "", app.Base))
 
 	// Get All Commands
 	routes := app.Router.GetRouteMap()
 
 	// List them out
-	fmt.Println("COMMANDS:")
+	app.Output.WriteLn("COMMANDS:")
 
 	for key, route := range routes {
 		usage := fmt.Sprintf("%s %s [options] [arguments]", app.Base, key)
-		fmt.Println(fmt.Sprintf("%s %10s %32s - %s", key, "", usage, route.GetDescription()))
+		app.Output.WriteLn(fmt.Sprintf("%s %10s %32s - %s", key, "", usage, route.GetDescription()))
 	}
 }
