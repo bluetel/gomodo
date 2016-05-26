@@ -16,6 +16,7 @@ type Application struct {
 	Arguments   []string
 	Options     []string
 	Router      Router
+	Output      Output
 }
 
 // Creates A new Application Struct and returns a pointer to this.
@@ -24,6 +25,7 @@ func NewApplication(name string, description string, version string) *Applicatio
 		Name:        name,
 		Description: description,
 		Version:     version,
+		Output:      NewStreamOutput(),
 		Router:      NewRouter(),
 	}
 }
