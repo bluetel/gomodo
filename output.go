@@ -1,6 +1,7 @@
 package gomodo
 
 import (
+	"bytes"
 	"fmt"
 	"io"
 	"os"
@@ -14,26 +15,35 @@ type Output interface {
 	Write(out string)
 	// Method to write a new line
 	WriteLn(out string)
+	// Writes to the console, through various means
+	Output()
 }
 
 // Standard OS output
 type StreamOutput struct {
-	w io.Writer
+	w      io.Writer
+	Buffer bytes.Buffer
 }
 
 // Creates a new stream output using os output
 func NewStreamOutput() *StreamOutput {
 	return &StreamOutput{
-		w: os.Stdout,
+		w:      os.Stdout,
+		Buffer: bytes.Buffer{},
 	}
 }
 
 // Writes a string line
 func (s *StreamOutput) Write(out string) {
-	io.WriteString(s.w, out)
+	s.Buffer.WriteString(out)
 }
 
 // Writes a new line
 func (s *StreamOutput) WriteLn(out string) {
-	io.WriteString(s.w, fmt.Sprintf("%s\n", out))
+	s.Buffer.WriteString(fmt.Sprintf("%s\n", out))
+}
+
+// Writes the buffered string to the stream
+func (s *StreamOutput) Output() {
+	s.Buffer.WriteTo(s.w)
 }

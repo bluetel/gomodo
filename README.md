@@ -10,7 +10,6 @@ package main
 
 import(
 	"github.com/Bluetel-Solutions/gomodo"
-	"fmt"
 )
 
 type Task struct {
@@ -29,7 +28,7 @@ func (t *Task) GetDescription() string {
 
 // The Task Action
 func (t *Task) PerformAction(app *gomodo.Application) {
-	fmt.Println("Hello World!")
+	app.Output.WriteLn("Hello World!")
 }
 
 func main() {

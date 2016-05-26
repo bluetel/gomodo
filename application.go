@@ -51,7 +51,7 @@ func (app *Application) Run() {
 	}
 
 	// List commands as the specified was not found
-	list.PerformAction(app)
+	app.Forward("list")
 }
 
 // Used to execute a command, Inside another command
@@ -64,6 +64,8 @@ func (app *Application) Forward(action string) bool {
 		flags.Parse(cmd)
 		// Run command
 		cmd.PerformAction(app)
+		// Commit the output
+		app.Output.Output()
 	}
 
 	return success
