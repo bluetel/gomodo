@@ -2,7 +2,7 @@ package gomodo
 
 import (
 	"bytes"
-	_ "github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
@@ -13,4 +13,5 @@ func TestItShouldBeAbleToWriteAString(t *testing.T) {
 	}
 
 	stream.Write("test")
+	assert.Equal(t, "test", stream.Buffer.String(), "The test string should have been written to the buffer")
 }
