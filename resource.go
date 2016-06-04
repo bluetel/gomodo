@@ -47,6 +47,6 @@ func (t *ListTask) PerformAction(app *Application) {
 
 	for key, route := range routes {
 		usage := fmt.Sprintf("%s %s [options] [arguments]", app.Base, key)
-		app.Output.WriteLn(fmt.Sprintf("%s %10s %32s - %s", key, "", usage, route.GetDescription()))
+		app.Output.WriteLn(fmt.Sprintf("%s %s - %s", RightPad(key, 20, " "), RightPad(usage, 40, " "), route.GetDescription()))
 	}
 }
